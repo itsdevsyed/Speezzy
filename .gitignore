@@ -1,0 +1,22 @@
+# Root-level ignores
+node_modules
+.pnpm
+.turbo
+turbo
+.cache
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env files
+.env
+.env.*
+
+# macOS/Windows system files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist
+build

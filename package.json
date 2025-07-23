@@ -1,0 +1,25 @@
+  {
+  "name": "speezzy",
+  "version": "1.0.0",
+  "description": "Speezzy Monorepo",
+  "main": "index.js",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",    "test": "turbo run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.13.1",
+  "devDependencies": {
+    "turbo": "latest"
+  },
+  "workspaces":[
+    "api",
+    "web",
+    "mobile",
+    "packages/*"
+  ]
+}

@@ -1,0 +1,19 @@
+
+{
+    "name": "@speezzy/types",
+    "version": "1.0.0",
+    "description": "Shared TypeScript types and GraphQL schema definitions for Speezzy applications.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+      "build": "tsc --build tsconfig.json",
+      "dev": "tsc --build tsconfig.json --watch",
+      "lint": "turbo run lint"
+    },
+    "keywords": [],
+    "author": "Your Name",
+    "license": "ISC",
+    "devDependencies": {
+      "typescript": "^5.0.0"
+    }
+  }

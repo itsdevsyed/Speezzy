@@ -1,0 +1,101 @@
+# apps/api/prisma/schema.prisma models will be reflected here.
+# This is the public API contract for your GraphQL server.
+
+type User {
+  id: ID!
+  name: String
+  email: String!
+  phone: String
+  role: UserRole! # Assuming UserRole is an Enum
+}
+
+type Shop {
+  id: ID!
+  name: String!
+  description: String
+  address: String!
+  latitude: Float!
+  longitude: Float!
+  category: String!
+  ownerId: ID!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+  imageUrl: String
+  shopId: ID!
+  shop: Shop!
+}
+
+type Order {
+  id: ID!
+  userId: ID!
+  user: User!
+  shopId: ID!
+  shop: Shop!
+  status: OrderStatus!
+  totalPrice: Float!
+  items: [OrderItem!]!
+}
+
+type OrderItem {
+  id: ID!
+  productId: ID!
+  product: Product!
+  quantity: Int!
+  price: Float!
+}
+
+enum UserRole {
+  CUSTOMER
+  SHOP_OWNER
+  DELIVERY_AGENT
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  PICKED_UP
+  DELIVERED
+  CANCELLED
+}
+
+# --- Input Types (for mutations) ---
+input CreateUserInput {
+  name: String
+  email: String!
+  phone: String
+  password: String!
+}
+
+input LoginInput {
+  phone: String!
+  otp: String!
+}
+
+# Add more input types as you define mutations
+
+# --- Queries ---
+type Query {
+  hello: String!
+  user(id: ID!): User
+  users: [User!]!
+  shop(id: ID!): Shop
+  shops(category: String, latitude: Float, longitude: Float, radiusKm: Float): [Shop!]! # Example for nearest shops
+  product(id: ID!): Product
+  products(shopId: ID!): [Product!]!
+  order(id: ID!): Order
+  orders(userId: ID!): [Order!]!
+}
+
+# --- Mutations ---
+type Mutation {
+  sendOtp(phone: String!): Boolean!
+  verifyOtp(phone: String!, otp: String!): String! # Returns JWT token
+  createUser(input: CreateUserInput!): User!
+  # Add more mutations for shop, product, order creation etc.
+}
